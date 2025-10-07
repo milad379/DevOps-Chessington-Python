@@ -46,21 +46,25 @@ class Pawn(Piece):
         if self.player == Player.BLACK:
             # Black pawn moves down (decreasing row numbers)
             one_square = Square.at(current_square.row - 1, current_square.col)
-            moves.append(one_square)
+            if board.get_piece(one_square) is None:
+                moves.append(one_square)
 
-            # If pawn is at starting position (row 6), it can move two squares
-            if current_square.row == 6:
-                two_squares = Square.at(current_square.row - 2, current_square.col)
-                moves.append(two_squares)
+                # If pawn is at starting position (row 6), it can move two squares
+                if current_square.row == 6:
+                    two_squares = Square.at(current_square.row - 2, current_square.col)
+                    if board.get_piece(two_squares) is None:
+                        moves.append(two_squares)
         else:
             # White pawn moves up (increasing row numbers)
             one_square = Square.at(current_square.row + 1, current_square.col)
-            moves.append(one_square)
+            if board.get_piece(one_square) is None:
+                moves.append(one_square)
 
-            # If pawn is at starting position (row 1), it can move two squares
-            if current_square.row == 1:
-                two_squares = Square.at(current_square.row + 2, current_square.col)
-                moves.append(two_squares)
+                # If pawn is at starting position (row 1), it can move two squares
+                if current_square.row == 1:
+                    two_squares = Square.at(current_square.row + 2, current_square.col)
+                    if board.get_piece(two_squares) is None:
+                        moves.append(two_squares)
 
         return moves
 
